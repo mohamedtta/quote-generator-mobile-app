@@ -8,7 +8,7 @@ class HomeController extends GetxController{
   ApiFunctions apiFunctions = ApiFunctions();
   QuoteModel quoteModel = QuoteModel();
   MyDatabase database = MyDatabase();
-  int favoriteQuotesCount = 0;
+  int? favoriteQuotesCount ;
   bool isQuoteSaved = false;
   List<Map> quotesIds = [];
 

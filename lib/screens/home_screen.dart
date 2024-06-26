@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quotes/controllers/home_controller.dart';
-import 'package:quotes/my_colors.dart';
 import 'package:quotes/screens/favorite_screen.dart';
 import 'package:quotes/widgets/background_widget.dart';
 import 'package:quotes/widgets/my_button.dart';
@@ -56,11 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     GetBuilder<HomeController>(builder: (homeController){
-                      return CircleAvatar(
-                        radius: 14,
-                        backgroundColor: Colors.black,
-                        child: Text('${homeController.favoriteQuotesCount}',style: const TextStyle(color: Colors.white),),
-                      );
+                      if(homeController.favoriteQuotesCount == null){
+                        return Text('');
+                      }else{
+                        return CircleAvatar(
+                          radius: 14,
+                          backgroundColor: Colors.black,
+                          child: Text('${homeController.favoriteQuotesCount}',style: const TextStyle(color: Colors.white),),
+                        );
+                      }
                     })
                   ],
                 ),
@@ -68,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 10,),
               GetBuilder<HomeController>(builder: (homeController){
                 if(homeController.quoteModel.content == null){
-                  return const CircularProgressIndicator(color: MyColors.myBlue,);
+                  return Lottie.asset('assets/quote_loading.json');
                 }else {
                   return QuoteContainer(quoteModel: homeController.quoteModel,onPressed: (){ homeController.getQuote();},);
                 }
